@@ -1,16 +1,21 @@
+import { useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from './screens/Home'
 import Login from './screens/Login'
 import NotFound from './screens/NotFound'
 
 function App() {
-  let isLogin = true
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          {isLogin ? <Login /> : <Home />}
+          {isLoggedIn ? (
+            <Home setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <Login setIsLoggedIn={setIsLoggedIn} />
+          )}
         </Route>
         <Route>
           <NotFound />
