@@ -1,10 +1,11 @@
 import React from 'react'
+import { isLoggedInVar } from '../apollo'
 
-const Home = ({ setIsLoggedIn }) => {
+const Home = () => {
   return (
     <>
       <h1>Home</h1>
-      <button onClick={() => setIsLoggedIn(false)}>바로 logout하기</button>
+      <button onClick={() => isLoggedInVar(false)}>바로 logout하기</button>
     </>
   )
 }
