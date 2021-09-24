@@ -154,3 +154,11 @@ const GlobalStyle = createGlobalStyle`
 - [x] Architechure
 - [x] Styles
 - [ ] Log In / Sign Up
+
+  1.  스타일만 먼저 만들기
+  2.  from의 로직을 만들기
+  3.  실제 Back-end 만들기
+
+- [ ] Feed
+- [ ] Profile
+- [ ] See Hashtag
