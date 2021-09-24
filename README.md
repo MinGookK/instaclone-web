@@ -150,6 +150,7 @@ const GlobalStyle = createGlobalStyle`
 ## Setup
 
 - [x] Router
-- [ ] Authantication
-- [ ] Architechure
-- [ ] Styles
+- [x] Authantication
+- [x] Architechure
+- [x] Styles
+- [ ] Log In / Sign Up
