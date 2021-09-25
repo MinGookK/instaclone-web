@@ -10,8 +10,8 @@ import AuthLayout from '../components/auth/AuthLayout'
 import Separator from '../components/auth/Separator'
 import Input from '../components/auth/Input'
 import FormBox from '../components/auth/FormBox'
-import SubmitButton from '../components/auth/SubmitButton'
 import BottomBox from '../components/auth/BottomBox'
+import Button from '../components/auth/Button'
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -29,20 +29,20 @@ const Login = () => {
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
         <form>
-          <Input type="text" placeholder="Username" />
-          <Input type="password" placeholder="Password" />
-          <SubmitButton type="submit" value="Log in" />
+          <Input type="text" placeholder="전화번호, 사용자 이름 또는 이메일" />
+          <Input type="password" placeholder="비밀번호" />
+          <Button type="submit" value="로그인" />
         </form>
-        <Separator text="or" />
+        <Separator text="또는" />
         <FacebookLogin>
           <FontAwesomeIcon icon={faFacebookSquare} />
-          <span>Log in with Facebook</span>
+          <span>Facebook으로 로그인</span>
         </FacebookLogin>
       </FormBox>
       <BottomBox
-        text="Don't have an account?"
+        text="계정이 없으신가요?"
         link={routes.signUp}
-        linkText="Sign Up"
+        linkText="가입하기"
       />
     </AuthLayout>
   )

@@ -14,6 +14,8 @@ const Sseparator = styled.div`
     background-color: ${props => props.theme.borderColor};
   }
   span {
+    text-align: center;
+    width: 20%;
     margin: 0px 10px;
     font-weight: 600;
     font-size: 12px;

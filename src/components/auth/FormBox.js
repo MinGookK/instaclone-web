@@ -24,3 +24,5 @@ const FormBox = ({ children }) => {
 }
 
 export default FormBox
+
+// 의문 margin-top 35px을 조정한 다른 formbox가 필요하면 어떡하지?,,
