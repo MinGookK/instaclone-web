@@ -16,6 +16,30 @@
 
 ## react hook form
 
+기본 폼
+`const {} = useForm();`
+
+원래 react
+
+1. state 만들기
+2. onchange 만들어 value 저장하도록 함
+3. input이 value를 가지게 함
+
+### register() / watch() / handleSubmit()
+
+1. register: 상태관리를 알아서 해줌 onchange같은거 안해도 됨. + required, maxlength같은 설정 가능
+2. watch: form에 담긴 값을 저장함
+3. handleSubmit : 새로고침을 막아주고 form이 유효한지 검사해줌
+   `const { register, watch, handleSubmit } = useForm()`
+
+`<Input ref ={register} name="username" type="text" placeholder="Username" />`
+컴포넌트에 ref={register}하면 됨.
+name이 반드시 있어야 함
+
+이렇게만 하면 onchange, state, value 모두 관리해줌
+
+그리고 watch() 안에 name을 key로 가지는 객체가 만들어짐
+
 ## Helmet Component
 
 ## props drilling with reactive variables
@@ -24,18 +48,18 @@ props를 전달하는 방법임.
 `makeVar()`를 사용하면 상태처럼 관리할 수 있음.
 
 ```js
-import { makeVar } from "@apollo/client";
+import { makeVar } from '@apollo/client'
 
-export const isLoggedInVar = makeVar(false);
+export const isLoggedInVar = makeVar(false)
 ```
 
 이렇게 하면 끝임 어디서든 받아올 수 있음.
 다만 component 내부에서 사용하고 싶다면 Hook을 사용해야 함.
 
 ```js
-import { isLoggedInVar } from "./apollo";
+import { isLoggedInVar } from './apollo'
 
-const isLoggedIn = useReactiveVar(isLoggedInVar);
+const isLoggedIn = useReactiveVar(isLoggedInVar)
 ```
 
 미쳤다.... 이러면 그냥 props를 관리 안해도 알아서 되는거야...
@@ -61,8 +85,8 @@ styled component는 말 그대로 component이기 때문에 props를 받을 수 
 
 ```js
 export const Component = styled.h1`
-  color: ${(props) => props.color};
-`;
+  color: ${props => props.color};
+`
 ```
 
 ### ThemeProvider
@@ -81,13 +105,13 @@ bgColor 같은 css 속성은 없지만 background-color를 표현하기 위해 �
 
 ```js
 export const lightTheme = {
-  fontColor: "#2c2c2c",
-  bgColor: "lightgray",
-};
+  fontColor: '#2c2c2c',
+  bgColor: 'lightgray',
+}
 export const darkTheme = {
-  fontColor: "lightgray",
-  bgColor: "#2c2c2c",
-};
+  fontColor: 'lightgray',
+  bgColor: '#2c2c2c',
+}
 ```
 
 그래서 이걸 밑처럼 사용하면 된다.
@@ -104,18 +128,18 @@ darkMode가 true라면 darkTheme을 아니라면 lightTheme을 하위 컴포넌�
 
 ```js
 const Title = sytled.h1`
-   color: ${(props) => props.theme.fontColor};
-`;
+   color: ${props => props.theme.fontColor};
+`
 const Container = styled.div`
-  background-color: ${(props) => props.theme.bgColor};
-`;
+  background-color: ${props => props.theme.bgColor};
+`
 const Login = () => {
   return (
     <Container>
       <Title>로그인 페이지 입니다.</Title>
     </Container>
-  );
-};
+  )
+}
 ```
 
 이런식으로 ThemeProvider로 감싸져 있는 하위 컴포넌트에서 자유롭게 theme 객체를 끌어다 쓸 수 있게 되었다.
@@ -139,7 +163,7 @@ const GlobalStyle = createGlobalStyle`
    h1{
       font-size: 어쩌구;
    }
-`;
+`
 ```
 
 위처럼 작성하고 최상위 컴포넌트에 GlobalStyle 써줘라
