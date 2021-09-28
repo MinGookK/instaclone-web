@@ -15,8 +15,8 @@ const Sseparator = styled.div`
   }
   span {
     text-align: center;
-    width: 20%;
     margin: 0px 10px;
+    width: 30%;
     font-weight: 600;
     font-size: 12px;
     color: #8e8e8e;

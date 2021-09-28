@@ -1,17 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 import {
   faFacebookSquare,
   faInstagram,
-} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import routes from './routes'
-import AuthLayout from '../components/auth/AuthLayout'
-import Separator from '../components/auth/Separator'
-import Input from '../components/auth/Input'
-import FormBox from '../components/auth/FormBox'
-import BottomBox from '../components/auth/BottomBox'
-import Button from '../components/auth/Button'
+} from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import routes from "./routes";
+import AuthLayout from "../components/auth/AuthLayout";
+import Separator from "../components/auth/Separator";
+import Input from "../components/auth/Input";
+import FormBox from "../components/auth/FormBox";
+import BottomBox from "../components/auth/BottomBox";
+import Button from "../components/auth/Button";
+import PageTitle from "../components/PageTitle";
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -19,11 +20,12 @@ const FacebookLogin = styled.div`
     margin-left: 10px;
     font-weight: 600;
   }
-`
+`;
 
 const Login = () => {
   return (
     <AuthLayout>
+      <PageTitle title="로그인" />
       <FormBox>
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
@@ -45,7 +47,7 @@ const Login = () => {
         linkText="가입하기"
       />
     </AuthLayout>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

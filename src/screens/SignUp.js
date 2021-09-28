@@ -1,33 +1,31 @@
-import React from 'react'
-import styled from 'styled-components'
-import {
-  faFacebookSquare,
-  faInstagram,
-} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import routes from './routes'
-import AuthLayout from '../components/auth/AuthLayout'
-import Separator from '../components/auth/Separator'
-import Input from '../components/auth/Input'
-import FormBox from '../components/auth/FormBox'
-import BottomBox from '../components/auth/BottomBox'
-import Button from '../components/auth/Button'
+import React from "react";
+import styled from "styled-components";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import routes from "./routes";
+import AuthLayout from "../components/auth/AuthLayout";
+import Input from "../components/auth/Input";
+import FormBox from "../components/auth/FormBox";
+import BottomBox from "../components/auth/BottomBox";
+import Button from "../components/auth/Button";
+import PageTitle from "../components/PageTitle";
 
 const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 const SubTitle = styled.h2`
   text-align: center;
   font-size: 17px;
   font-weight: 600;
   color: #979797;
   margin-top: 12px;
-`
+`;
 const SignUp = () => {
   return (
     <AuthLayout>
+      <PageTitle title="회원가입" />
       <FormBox>
         <HeaderWrapper>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
@@ -47,7 +45,7 @@ const SignUp = () => {
         linkText="로그인"
       />
     </AuthLayout>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
