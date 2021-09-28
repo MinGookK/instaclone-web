@@ -25,12 +25,14 @@
 2. onchange 만들어 value 저장하도록 함
 3. input이 value를 가지게 함
 
-### register() / watch() / handleSubmit()
+### register() / watch() / handleSubmit() / formsState
 
 1. register: 상태관리를 알아서 해줌 onchange같은거 안해도 됨. + required, maxlength같은 설정 가능
 2. watch: form에 담긴 값을 저장함
-3. handleSubmit : 새로고침을 막아주고 form이 유효한지 검사해줌
-   `const { register, watch, handleSubmit } = useForm()`
+3. handleSubmit: 새로고침을 막아주고 form이 유효한지 검사해줌
+4. formsState: form이 어떤 상태인지 모든 것을 알 수 있음. 처음에 useForm의 모드를 전달하여 다양하게 사용 가능(맞는 형태일때만 로그인 버튼 활성화, errors는 업데이트 때 여기에 포함됨)
+
+`const { register, watch, handleSubmit } = useForm()`
 
 `<Input ref ={register} name="username" type="text" placeholder="Username" />`
 컴포넌트에 ref={register}하면 됨.

@@ -14,6 +14,7 @@ import BottomBox from '../components/auth/BottomBox'
 import Button from '../components/auth/Button'
 import PageTitle from '../components/PageTitle'
 import { useForm } from 'react-hook-form'
+import FormError from '../components/auth/FormError'
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -24,9 +25,11 @@ const FacebookLogin = styled.div`
 `
 
 const Login = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, formState } = useForm({
+    mode: 'onChange',
+  })
   const onValid = data => console.log(data)
-  const onInValid = data => console.log(data, 'invalid')
+  console.log(formState.errors)
   return (
     <AuthLayout>
       <PageTitle title="로그인" />
@@ -34,24 +37,30 @@ const Login = () => {
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
-        <form onSubmit={handleSubmit(onValid, onInValid)}>
+        <form onSubmit={handleSubmit(onValid)}>
           <Input
             {...register('username', {
               required: 'username이 필요합니다',
-              minLength: 5,
-              validate: val => val.includes('potato'),
+              minLength: {
+                value: 5,
+                message: 'username은 5글자를 넘어야 합니다.',
+              },
             })}
             type="text"
             placeholder="전화번호, 사용자 이름 또는 이메일"
+            hasError={Boolean(formState.errors?.username?.message)}
           />
+          <FormError message={formState.errors?.username?.message} />
           <Input
             {...register('password', {
               required: 'password가 필요합니다.',
             })}
             type="password"
             placeholder="비밀번호"
+            hasError={Boolean(formState.errors?.password?.message)}
           />
-          <Button type="submit" value="로그인" />
+          <FormError message={formState.errors?.password?.message} />
+          <Button type="submit" value="로그인" disabled={!formState.isValid} />
         </form>
         <Separator text="또는" />
         <FacebookLogin>
