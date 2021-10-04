@@ -1,5 +1,30 @@
 # instaclone web
 
+## Apollo client 사용하기 (백엔드랑 소통하기)
+
+```js
+// apollo.js
+export cosnt client = new Apolloclient({
+   uri: "[니 서버 주소, 로컬호스트던 뭐든 주소 적기]",
+   cache: new InmemoryCache()
+})
+```
+
+이렇게 apollo.js에서 클라이언트를 생성해주자.
+그리고 생성한 client를 ApolloProvider에 전달해주어야 한다.
+
+```js
+//App.js
+import client from "./apollo.js"
+
+///
+<ApolloProvider client={client}>
+ <너의 나머지 프로바이더들 + 라우터 + 컴포넌트 등등~~>
+<ApolloProvider>
+```
+
+이러고 apollo developer tools 열어보면 docs를 열어볼 수 있다 쏘쿨!!
+
 ## Using pakages
 
 1. styled component : css를 하기 위해 사용

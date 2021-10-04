@@ -9,5 +9,5 @@ const SFormError = styled.span`
 `
 
 export default function FormError({ message }) {
-  return !message ? null : <SFormError>{message}</SFormError>
+  return !message || message === '' ? null : <SFormError>{message}</SFormError>
 }
