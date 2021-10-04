@@ -7,6 +7,7 @@ const Input = styled.input`
   background-color: #fafafa;
   margin-top: 5px;
   box-sizing: border-box;
+  color: ${props => props.theme.bgColor};
   &::placeholder {
     font-size: 12px;
   }

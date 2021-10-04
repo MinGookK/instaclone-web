@@ -1,5 +1,12 @@
+import { useReactiveVar } from '@apollo/client'
+import {
+  faFacebookF,
+  faFacebookSquare,
+} from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import styled from 'styled-components'
+import { darkModeOff, darkModeOn, darkModeVar } from '../../apollo'
 
 const Container = styled.div`
   display: flex;
@@ -13,10 +20,20 @@ const Wrapper = styled.div`
   width: 100%;
 `
 
+const Footer = styled.footer`
+  margin-top: 20px;
+  cursor: pointer;
+`
+
 function AuthLayout({ children }) {
+  const darkMode = useReactiveVar(darkModeVar)
+
   return (
     <Container>
       <Wrapper>{children}</Wrapper>
+      <Footer onClick={darkMode ? darkModeOff : darkModeOn}>
+        <FontAwesomeIcon icon={darkMode ? faFacebookSquare : faFacebookF} />
+      </Footer>
     </Container>
   )
 }

@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form'
 import FormError from '../components/auth/FormError'
 import { useMutation, gql } from '@apollo/client'
 import { logUserIn } from '../apollo'
+import { useLocation } from 'react-router'
 
 const FacebookLogin = styled.div`
   color: #385285;
@@ -37,6 +38,8 @@ const LOGIN = gql`
 `
 
 const Login = () => {
+  const location = useLocation()
+  console.log(location)
   const onCompleted = data => {
     const {
       login: { error, ok, token },
@@ -57,6 +60,10 @@ const Login = () => {
   })
   const { register, handleSubmit, formState, setError, clearErrors } = useForm({
     mode: 'onChange',
+    defaultValues: {
+      username: location?.state?.username,
+      password: location?.state?.password,
+    },
   })
 
   const onValid = data => {
@@ -73,6 +80,7 @@ const Login = () => {
         <div>
           <FontAwesomeIcon icon={faInstagram} size="3x" />
         </div>
+        {location?.state?.message}
         <form onSubmit={handleSubmit(onValid)}>
           <Input
             {...register('username', {

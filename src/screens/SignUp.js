@@ -48,8 +48,13 @@ const CREATE_ACCOUNT_MUTATION = gql`
   }
 `
 const SignUp = () => {
+  const { register, handleSubmit, setError, formState, getValues } = useForm({
+    mode: 'onChange',
+  })
   const history = useHistory()
+
   const onCompleted = data => {
+    const { username, password } = getValues()
     const {
       createAccount: { ok, error },
     } = data
@@ -58,13 +63,14 @@ const SignUp = () => {
         message: error,
       })
     }
-    history.push(routes.home)
+    history.push(routes.home, {
+      message: '계정이 생성되었습니다. 로그인해주세요',
+      username,
+      password,
+    })
   }
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
-  })
-  const { register, handleSubmit, setError, formState } = useForm({
-    mode: 'onChange',
   })
   // 유효하면 뮤테이션을 날려줘야 해
   const onValid = data => {
