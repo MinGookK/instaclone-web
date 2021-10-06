@@ -39,7 +39,6 @@ const LOGIN = gql`
 
 const Login = () => {
   const location = useLocation()
-  console.log(location)
   const onCompleted = data => {
     const {
       login: { error, ok, token },
