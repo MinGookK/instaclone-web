@@ -3,8 +3,12 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faCompass, faUser } from '@fortawesome/free-regular-svg-icons'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { isLoggedInVar } from '../apollo'
+import useUser from '../hooks/useUser'
+import routes from '../screens/routes'
+import Avatar from './Avatar'
 
 const SHeader = styled.header`
   width: 100%;
@@ -29,9 +33,22 @@ const Column = styled.div``
 const Icon = styled.span`
   margin-left: 15px;
 `
+const Button = styled.span`
+  background-color: ${props => props.theme.accent};
+  color: white;
+  border-radius: 4px;
+  padding: 5px 15px;
+  font-weight: 600;
+`
+
+const IconsContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 function Header() {
   const isLoggedIn = useReactiveVar(isLoggedInVar)
+  const { data } = useUser()
   return (
     <SHeader>
       <Wrapper>
@@ -40,7 +57,7 @@ function Header() {
         </Column>
         <Column>
           {isLoggedIn ? (
-            <>
+            <IconsContainer>
               <Icon>
                 <FontAwesomeIcon icon={faHome} size="lg" />
               </Icon>
@@ -48,10 +65,15 @@ function Header() {
                 <FontAwesomeIcon icon={faCompass} size="lg" />
               </Icon>
               <Icon>
-                <FontAwesomeIcon icon={faUser} size="lg" />
+                {/* data를 기다려주어야만 하기 때문에 ?를 붙여서 데이터를 받아올때 까지 기다리자 */}
+                <Avatar url={data?.me?.avatar} />
               </Icon>
-            </>
-          ) : null}
+            </IconsContainer>
+          ) : (
+            <Link href={routes.home}>
+              <Button>Login</Button>
+            </Link>
+          )}
         </Column>
       </Wrapper>
     </SHeader>
