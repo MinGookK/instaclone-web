@@ -5,7 +5,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Photo from '../components/feed/Photo'
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
   query seeFeed {
     seeFeed {
       id
