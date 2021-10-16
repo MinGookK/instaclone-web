@@ -14,6 +14,7 @@ import Avatar from '../Avatar'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { FEED_QUERY } from '../../screens/Home'
+import Comments from './Comments'
 
 const TOGGLE_LIKE_MUTATION = gql`
   mutation toggleLike($id: Int!) {
@@ -71,7 +72,16 @@ const Likes = styled(FatText)`
   margin-top: 15px;
 `
 
-function Photo({ id, user, file, isLiked, totalLike }) {
+function Photo({
+  id,
+  user,
+  file,
+  isLiked,
+  totalLike,
+  caption,
+  totalComment,
+  comments,
+}) {
   const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
     variables: {
       id,
@@ -112,6 +122,12 @@ function Photo({ id, user, file, isLiked, totalLike }) {
           </div>
         </PhotoActions>
         <Likes>{totalLike === 1 ? '1 like' : `${totalLike} likes`}</Likes>
+        <Comments
+          caption={caption}
+          totalComment={totalComment}
+          author={user.username}
+          comments={comments}
+        />
       </PhotoData>
     </PhotoContainer>
   )
@@ -119,6 +135,7 @@ function Photo({ id, user, file, isLiked, totalLike }) {
 
 Photo.propTypes = {
   id: PropTypes.number.isRequired,
+  caption: PropTypes.string,
   user: PropTypes.shape({
     avatar: PropTypes.string,
     username: PropTypes.string.isRequired,
@@ -126,6 +143,7 @@ Photo.propTypes = {
   file: PropTypes.string.isRequired,
   isLiked: PropTypes.bool.isRequired,
   totalLike: PropTypes.number.isRequired,
+  totalComment: PropTypes.number.isRequired,
 }
 
 export default Photo
