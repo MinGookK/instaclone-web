@@ -8,7 +8,7 @@ const CommentsContainer = styled.div`
 
 const CommentCount = styled.span`
   opacity: 0.7;
-  margin: 5px 0px;
+  margin: 10px 0px;
   font-weight: 600;
   font-size: 12px;
   display: block;

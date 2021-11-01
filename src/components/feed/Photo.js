@@ -82,13 +82,37 @@ function Photo({
   totalComment,
   comments,
 }) {
-  const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
+  const updateToggleLike = (cache, result) => {
+    const {
+      data: {
+        toggleLike: { ok },
+      },
+    } = result
+    if (ok) {
+      const photoId = `Photo:${id}`
+      cache.modify({
+        id: photoId,
+        fields: {
+          totalLike(prev) {
+            if (isLiked) {
+              return prev - 1
+            }
+            return prev + 1
+          },
+          isLiked(prev) {
+            return !prev
+          },
+        },
+      })
+    }
+  }
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
     variables: {
       id,
     },
-    //근데 이건 모든 데이터를 로드하기 때문에 비효율적, fragment사용해서 필요한 것만 업데이트 하도록 해야함.
-    refetchQueries: [FEED_QUERY],
+    update: updateToggleLike,
   })
+
   return (
     <PhotoContainer key={id}>
       <PhotoHeader>
