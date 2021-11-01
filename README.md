@@ -1,5 +1,17 @@
 # instaclone web
 
+## fragment에 key 전달하기
+
+map과 같이 컴포넌트를 반복적으로 생성해내는 경우에는 key가 컴포넌트에 꼭 들어가야 한다. (렌더링 성능 문제)
+하지만 fragment를 반복적으로 생성할 때는 key를 넣을수가 없는데 이것은 내가 알고 있는 <></>형태가 단축문이었기 때문
+
+```js
+import React from 'react'
+;<React.fragment key={id}>...어쩌구</React.fragment>
+```
+
+와 같이 `React.fragment`를 사용하면 기존의 fragment의 역할을 해내면서 key값을 부여할 수 있다.
+
 ## Apollo client 사용하기 (백엔드랑 소통하기)
 
 ```js

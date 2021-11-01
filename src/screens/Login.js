@@ -51,8 +51,6 @@ const Login = () => {
     if (token) {
       logUserIn(token)
     }
-
-    console.log(error, ok, token)
   }
   const [login, { loading }] = useMutation(LOGIN, {
     onCompleted,

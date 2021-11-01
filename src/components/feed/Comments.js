@@ -2,6 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Comment from './Comment'
+import { useForm } from 'react-hook-form'
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/client'
+
 const CommentsContainer = styled.div`
   margin-top: 5px;
 `
@@ -13,7 +17,37 @@ const CommentCount = styled.span`
   font-size: 12px;
   display: block;
 `
-export default function Comments({ caption, totalComment, author, comments }) {
+
+const CREATE_COMMENT_MUTATION = gql`
+  mutation createComment($id: Int!, $payload: String!) {
+    createComment(id: $id, payload: $payload) {
+      ok
+      error
+    }
+  }
+`
+export default function Comments({
+  photoId,
+  caption,
+  totalComment,
+  author,
+  comments,
+}) {
+  const [createCommentMutation, { loading }] = useMutation(
+    CREATE_COMMENT_MUTATION
+  )
+  const { register, handleSubmit, setValue } = useForm()
+  const onValid = data => {
+    const { payload } = data
+    createCommentMutation({
+      variables: {
+        id: photoId,
+        payload,
+      },
+    })
+    setValue('payload', '')
+  }
+
   return (
     <CommentsContainer>
       <Comment author={author} payload={caption} />
@@ -27,11 +61,17 @@ export default function Comments({ caption, totalComment, author, comments }) {
           payload={comment.payload}
         />
       ))}
+      <div>
+        <form onSubmit={handleSubmit(onValid)}>
+          <input {...register('payload')} placeholder="댓글을 입력해 주세요." />
+        </form>
+      </div>
     </CommentsContainer>
   )
 }
 
 Comments.propTypes = {
+  photoId: PropTypes.number.isRequired,
   caption: PropTypes.string,
   totalComment: PropTypes.number.isRequired,
   author: PropTypes.string.isRequired,

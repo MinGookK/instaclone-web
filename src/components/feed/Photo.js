@@ -147,6 +147,7 @@ function Photo({
         </PhotoActions>
         <Likes>{totalLike === 1 ? '1 like' : `${totalLike} likes`}</Likes>
         <Comments
+          photoId={id}
           caption={caption}
           totalComment={totalComment}
           author={user.username}
