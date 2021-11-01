@@ -10,6 +10,19 @@ import useUser from '../../hooks/useUser'
 const CommentsContainer = styled.div`
   margin-top: 5px;
 `
+const PostCommentContainer = styled.div`
+  margin-top: 10px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-top: 1px solid ${props => props.theme.borderColor};
+`
+
+const PostCommentInput = styled.input`
+  width: 100%;
+  &::placeholder {
+    font-size: 12px;
+  }
+`
 
 const CommentCount = styled.span`
   opacity: 0.7;
@@ -36,7 +49,6 @@ export default function Comments({
   comments,
 }) {
   const { data: userData } = useUser()
-  console.log(userData)
   const updateCreateComment = (cache, result) => {
     const payload = getValues('payload')
     setValue('payload', '')
@@ -45,7 +57,6 @@ export default function Comments({
         createComment: { ok, id },
       },
     } = result
-    console.log(ok, id)
     if (ok && userData?.me) {
       const newComment = {
         __typename: 'Comment',
@@ -78,6 +89,9 @@ export default function Comments({
           comments(prev) {
             return [...prev, newCacheComment]
           },
+          totalComment(prev) {
+            return prev + 1
+          },
         },
       })
     }
@@ -92,7 +106,6 @@ export default function Comments({
   const onValid = data => {
     const { payload } = data
     if (loading) {
-      console.log('로딩중입니다.')
       return
     }
     createCommentMutation({
@@ -112,15 +125,21 @@ export default function Comments({
       {comments?.map(comment => (
         <Comment
           key={comment.id}
+          photoId={photoId}
+          id={comment.id}
           author={comment.user.username}
+          isMine={comment.isMine}
           payload={comment.payload}
         />
       ))}
-      <div>
+      <PostCommentContainer>
         <form onSubmit={handleSubmit(onValid)}>
-          <input {...register('payload')} placeholder="댓글을 입력해 주세요." />
+          <PostCommentInput
+            {...register('payload')}
+            placeholder="댓글을 입력해 주세요."
+          />
         </form>
-      </div>
+      </PostCommentContainer>
     </CommentsContainer>
   )
 }
