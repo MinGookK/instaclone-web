@@ -66,7 +66,9 @@ function Header() {
               </Icon>
               <Icon>
                 {/* data를 기다려주어야만 하기 때문에 ?를 붙여서 데이터를 받아올때 까지 기다리자 */}
-                <Avatar url={data?.me?.avatar} />
+                <Link to={`/users/${data?.me?.username}`}>
+                  <Avatar url={data?.me?.avatar} />
+                </Link>
               </Icon>
             </IconsContainer>
           ) : (

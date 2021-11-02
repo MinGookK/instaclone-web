@@ -15,6 +15,7 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { FEED_QUERY } from '../../screens/Home'
 import Comments from './Comments'
+import { Link } from 'react-router-dom'
 
 const TOGGLE_LIKE_MUTATION = gql`
   mutation toggleLike($id: Int!) {
@@ -31,10 +32,11 @@ const PhotoContainer = styled.div`
   border-radius: 5px;
   margin-bottom: 20px;
   max-width: 615px;
+  width: 100%;
 `
 const PhotoHeader = styled.div`
   padding: 15px;
-  display: felx;
+  display: flex;
   align-items: center;
 `
 const Username = styled(FatText)`
@@ -116,8 +118,12 @@ function Photo({
   return (
     <PhotoContainer key={id}>
       <PhotoHeader>
-        <Avatar lg url={user.avatar} />
-        <Username>{user.username}</Username>
+        <Link to={`/users/${user.username}`}>
+          <Avatar lg url={user.avatar} />
+        </Link>
+        <Link to={`/users/${user.username}`}>
+          <Username>{user.username}</Username>
+        </Link>
       </PhotoHeader>
       <PhotoFile>
         <img alt="그림" src={file} />
